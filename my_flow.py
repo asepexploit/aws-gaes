@@ -141,7 +141,8 @@ def parse_variables(path: str = "variables.txt") -> dict:
                     continue
                 if "=" in line:
                     k, v = line.split("=", 1)
-                    vars_[k.strip().upper()] = v.strip()
+                    choices = [x.strip() for x in v.split("|") if x.strip()]
+                    vars_[k.strip().upper()] = random.choice(choices)
     except FileNotFoundError:
         pass
     return vars_
