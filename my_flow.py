@@ -233,9 +233,7 @@ try:
             time.sleep(0.3)
             ac.hotkey("ctrl", "a")
             ac.type(otp)
-            time.sleep(0.5)
-            ac.click_text("Verify", timeout=10)
-            print("  ✓ OTP disubmit")
+            print("  ✓ OTP diisi")
             time.sleep(3)
 
         else:
