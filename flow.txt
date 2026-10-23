@@ -10,10 +10,65 @@
 #   otp           = tunggu OTP dari inbox lalu ketik di template ini
 #   sleep:2       = tunggu X detik (tanpa template)
 
-1  -> step1-klik-google-search-aws -> klik
+1  -> 1 -> klik
 2  -> step2-klik-buat-akun         -> klik
 3  -> 3                            -> input:EMAIL
 4  -> 4                            -> klik
 5  -> 5                            -> input:NAMA
 6  -> 6                            -> klik
-7  -> 7-otp-field                  -> otp
+7  -> 7                  -> otp
+8  -> 8                  -> klik
+9  -> 9                  -> input:PASSWORD
+10  -> 10                  -> input:PASSWORD
+11  -> 11                  -> klik
+12  -> 12                  -> input:ANDREAS
+13  -> 13                  -> klik
+14  -> 14                  -> input:PHONE
+15  -> 15                  -> klik
+
+# SUDAH DI AWS GAESSSSSSSSSSSSSSSSSS ------
+
+16  -> 16                  -> klik
+17  -> 17                  -> klik
+18  -> 18                  -> klik
+
+# SSEARCHHH
+
+19  -> 19                  -> input:BEBAS -> EC2
+20  -> 20                  -> klik
+21  -> 21                  -> klik
+22  -> 22                  -> input:BEBAS -> HEHE1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
