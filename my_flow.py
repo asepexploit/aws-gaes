@@ -47,15 +47,13 @@ ac = AutoClicker(config_overrides={
 
 
 # ─── Helpers ──────────────────────────────────────────────
-def random_email_from_file(path: str = "email.txt") -> str:
+def random_domain_from_file(path: str = "email.txt") -> str:
     try:
         with open(path, encoding="utf-8") as f:
             domains = [l.strip() for l in f if l.strip()]
         if not domains:
             raise ValueError("email.txt kosong")
-        domain = random.choice(domains)
-        username = "".join(random.choices("abcdefghijklmnopqrstuvwxyz0123456789", k=10))
-        return f"{username}@{domain}"
+        return random.choice(domains)
     except FileNotFoundError:
         raise RuntimeError("email.txt tidak ditemukan")
 
@@ -92,8 +90,11 @@ def _api(action: str, params: dict = {}, retries: int = 5) -> dict:
     raise RuntimeError(f"API gagal setelah {retries} percobaan: {last_err}")
 
 
-def create_email() -> dict:
-    return _api("quick_email")
+def create_email(prefer_domain: str = "") -> dict:
+    params = {}
+    if prefer_domain:
+        params["prefer_domain"] = prefer_domain
+    return _api("quick_email", params)
 
 
 def poll_otp(email, token, ts) -> str | None:
@@ -190,8 +191,14 @@ try:
     )
     if args.skipemail and needs_email:
         if args.email.lower() == "success":
-            EMAIL = random_email_from_file()
-            print(f"  ✓ Email (dari email.txt): {EMAIL}")
+            domain = random_domain_from_file()
+            print(f"📧 Generate email dengan domain: {domain}...")
+            d           = create_email(prefer_domain=domain)
+            EMAIL       = d["email"]
+            EMAIL_TOKEN = d.get("account_token", "")
+            EMAIL_TS    = d.get("ts", "")
+            print(f"  ✓ Email : {EMAIL}")
+            print(f"  ✓ Nama  : {NAMA}")
         else:
             EMAIL = input("  Masukkan email: ").strip()
             print(f"  ✓ Email : {EMAIL}")
