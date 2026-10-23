@@ -284,7 +284,7 @@ try:
                 print(f"  ⚠ Tidak ada template yang ditemukan, pakai {tmpl_names[0]}.png")
         act_lower    = action.lower()
         pre_sleep    = s.get("pre_sleep", 0.0)
-        skip_detect  = s.get("skip_detect", False)
+        skip_detect  = s.get("skip_detect", False) or template.strip() == "-"
         if pre_sleep > 0:
             print(f"  ⏳ Tunggu {pre_sleep}s sebelum aksi...")
             time.sleep(pre_sleep)
