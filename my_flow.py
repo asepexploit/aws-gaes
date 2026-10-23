@@ -32,8 +32,8 @@ END   = args.end
 PANEL_URL     = "https://api.lpmterkam.org/"
 DEVICE_SECRET = "4e427c6afcd3267d370d96294b3d6411ffc5ed198dc995e40934ec6b73e32cc5"
 PASSWORD      = "Abgteam123@"
-OTP_INTERVAL  = 5
-OTP_TIMEOUT   = 80
+OTP_INTERVAL  = 8
+OTP_TIMEOUT   = 180
 T             = "visual_autoclicker/templates"
 
 ac = AutoClicker(config_overrides={
@@ -52,18 +52,28 @@ def random_name() -> str:
     return f"{random.choice(first)} {random.choice(last)}"
 
 
-def _api(action: str, params: dict = {}) -> dict:
+def _api(action: str, params: dict = {}, retries: int = 5) -> dict:
     base = PANEL_URL.rstrip("/")
     qp   = {"action": action, **params}
     url  = f"{base}/api/ext/tempmail.php?{urllib.parse.urlencode(qp)}"
     req  = urllib.request.Request(url, headers={
-        "X-Device-Secret": DEVICE_SECRET, "User-Agent": "Mozilla/5.0"
+        "X-Device-Secret": DEVICE_SECRET,
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     })
-    with urllib.request.urlopen(req, timeout=15) as r:
-        data = json.loads(r.read())
-    if not data.get("ok"):
-        raise RuntimeError(data.get("error", "API error"))
-    return data
+    last_err = None
+    for attempt in range(1, retries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as r:
+                data = json.loads(r.read())
+            if not data.get("ok"):
+                raise RuntimeError(data.get("error", "API error"))
+            return data
+        except Exception as e:
+            last_err = e
+            print(f"  ⚠ API error (attempt {attempt}/{retries}): {e}")
+            if attempt < retries:
+                time.sleep(3 * attempt)
+    raise RuntimeError(f"API gagal setelah {retries} percobaan: {last_err}")
 
 
 def create_email() -> dict:
