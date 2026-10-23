@@ -18,7 +18,7 @@
 # AWS SIGNUP
 4  -> 1,1-01,1-02,1-03,1-04                -> klik
 5  -> step2-klik-buat-akun  -> klik
-6  -> 3                     -> input:EMAIL
+6  -> 3,3-01                     -> input:EMAIL
 7  -> 4                     -> klik
 8  -> 5,5-01                -> input:NAMA
 9  -> 6                     -> klik
@@ -27,8 +27,8 @@
 12  -> 9                    -> input:PASSWORD
 13  -> 10,13-01                   -> input:PASSWORD
 14  -> 11                   -> klik
-15  -> 12                   -> input:ANDREAS
-16  -> 13                   -> klik
+15  -> 12,12-02                   -> input:ANDREAS
+16  -> 13,12-01                   -> klik
 17  -> 14,14-01                   -> input:PHONE
 18  -> 15                   -> klik
 
