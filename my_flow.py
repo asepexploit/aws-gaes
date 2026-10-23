@@ -257,6 +257,17 @@ try:
             print("  ✓ OTP diisi")
             time.sleep(3)
 
+        # ── scroll ──
+        elif act_lower.startswith("scroll:"):
+            parts_s = act_lower.split(":")
+            direction = parts_s[1] if len(parts_s) > 1 else "down"
+            amount = int(parts_s[2]) if len(parts_s) > 2 else 3
+            import pyautogui as _pg
+            cx, cy = _pg.size()
+            ac.scroll(cx // 2, cy // 2, amount=amount, direction=direction)
+            print(f"  ✓ Scroll {direction} x{amount}")
+            time.sleep(0.5)
+
         else:
             print(f"  ⚠ Aksi tidak dikenal: {action} — dilewati")
 
