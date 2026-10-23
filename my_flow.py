@@ -41,7 +41,7 @@ T             = "visual_autoclicker/templates"
 
 ac = AutoClicker(config_overrides={
     "matching": {"confidence": 0.75},
-    "retry": {"timeout": 25, "max_attempts": 5, "delay_between": 2.0},
+    "retry": {"timeout": 600, "max_attempts": 999, "delay_between": 2.0},
     "debug": {"save_on_failure": True},
 })
 
