@@ -134,10 +134,14 @@ def parse_flow(path: str) -> list:
             parts = [p.strip() for p in line.split("->")]
             if len(parts) < 3:
                 continue
+            action = parts[2]
+            # Format 4 bagian: input:BEBAS -> nilai bebas
+            if len(parts) == 4 and action.lower() == "input:bebas":
+                action = f"input:{parts[3]}"
             steps.append({
                 "num":      int(parts[0]),
                 "template": parts[1],
-                "action":   parts[2],
+                "action":   action,
             })
     return sorted(steps, key=lambda x: x["num"])
 
