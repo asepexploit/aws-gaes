@@ -222,7 +222,7 @@ try:
         # ── klik saja ──
         # support: klik, klik:timeout:60
         if act_lower.startswith("klik") or act_lower in ("continue", "click"):
-            timeout = 120
+            timeout = 600
             if "timeout:" in act_lower:
                 try:
                     timeout = int(act_lower.split("timeout:")[1])
@@ -244,7 +244,7 @@ try:
                 nilai = PASSWORD
             elif key in VARS:
                 nilai = VARS[key]
-            ac.click_image(tmpl_path, timeout=120)
+            ac.click_image(tmpl_path, timeout=600)
             time.sleep(0.3)
             ac.hotkey("ctrl", "a")
             ac.type(nilai)
@@ -258,7 +258,7 @@ try:
             direction = parts_s[1] if len(parts_s) > 1 else "down"
             amount = int(parts_s[2]) if len(parts_s) > 2 else 3
             import pyautogui as _pg
-            result = ac.find_image(tmpl_path, timeout=120)
+            result = ac.find_image(tmpl_path, timeout=600)
             _pg.click(result.x, result.y)
             time.sleep(1)
             ac.scroll(result.x, result.y, amount=amount, direction=direction)
@@ -274,7 +274,7 @@ try:
                 if not otp:
                     raise ElementNotFoundError("OTP tidak datang dalam 80 detik")
                 print(f"  ✓ OTP: {otp}")
-            ac.click_image(tmpl_path, timeout=120)
+            ac.click_image(tmpl_path, timeout=600)
             time.sleep(0.3)
             ac.hotkey("ctrl", "a")
             ac.type(otp)
