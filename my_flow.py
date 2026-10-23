@@ -34,7 +34,16 @@ END   = args.end
 # ─── Config ───────────────────────────────────────────────
 PANEL_URL     = "https://api.lpmterkam.org/"
 DEVICE_SECRET = "4e427c6afcd3267d370d96294b3d6411ffc5ed198dc995e40934ec6b73e32cc5"
-PASSWORD      = "Abgteam123@"
+def random_password() -> str:
+    import string
+    chars = string.ascii_letters + string.digits
+    while True:
+        pwd = "".join(random.choices(chars, k=10))
+        if (any(c.isupper() for c in pwd) and any(c.islower() for c in pwd)
+                and any(c.isdigit() for c in pwd)):
+            return pwd + "@Ag"
+
+PASSWORD = random_password()
 OTP_INTERVAL  = 8
 OTP_TIMEOUT   = 180
 T             = "visual_autoclicker/templates"
@@ -203,6 +212,11 @@ try:
             domains = [d.strip() for d in domains if d.strip()]
         except FileNotFoundError:
             domains = []
+        try:
+            blacklist = set(open("domain-mati.txt", encoding="utf-8").read().splitlines())
+        except FileNotFoundError:
+            blacklist = set()
+        domains = [d for d in domains if d not in blacklist]
         random.shuffle(domains)
         d = None
         for domain in domains:
