@@ -42,7 +42,9 @@ class MouseController:
         dur = duration if duration is not None else self.move_duration
         fx, fy = self._apply_jitter(x, y)
         logger.info("Click %s at (%d, %d)", button, fx, fy)
-        pyautogui.click(fx, fy, button=button, duration=dur)
+        pyautogui.moveTo(fx, fy, duration=dur)
+        time.sleep(1.0)
+        pyautogui.click(button=button)
         time.sleep(self.click_delay)
 
     def double_click(self, x: int, y: int,
