@@ -170,7 +170,7 @@ try:
         s["action"].upper() in ("INPUT:EMAIL", "OTP")
         for s in steps if START <= s["num"] <= END
     )
-    if args.skipemail:
+    if args.skipemail and needs_email:
         EMAIL = input("  Masukkan email: ").strip()
         print(f"  ✓ Email : {EMAIL}")
     elif needs_email:
