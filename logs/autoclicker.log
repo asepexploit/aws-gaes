@@ -1,0 +1,29 @@
+2026-10-23 23:52:09,044 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.80)
+2026-10-23 23:56:29,785 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.80)
+2026-10-23 23:56:51,839 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.80)
+2026-10-23 23:56:58,816 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.80)
+2026-10-23 23:57:04,576 [INFO] visual_autoclicker.mouse: Click left at (670, 706)
+2026-10-23 23:57:05,097 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/nama_tombol.png' at (670, 706) confidence=1.000
+2026-10-24 00:02:21,700 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:03:40,558 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:06:48,194 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:06:54,444 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:09:14,896 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:09:15,134 [INFO] visual_autoclicker.mouse: Click left at (509, 516)
+2026-10-24 00:09:15,659 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/step1-klik-google-search-aws.png' at (509, 516) confidence=0.993
+2026-10-24 00:11:01,738 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:11:10,843 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:11:11,078 [INFO] visual_autoclicker.mouse: Click left at (509, 516)
+2026-10-24 00:11:11,603 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/step1-klik-google-search-aws.png' at (509, 516) confidence=0.993
+2026-10-24 00:12:30,314 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:12:30,551 [INFO] visual_autoclicker.mouse: Click left at (509, 516)
+2026-10-24 00:12:31,069 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/step1-klik-google-search-aws.png' at (509, 516) confidence=0.993
+2026-10-24 00:12:34,392 [INFO] visual_autoclicker.mouse: Click left at (1155, 213)
+2026-10-24 00:12:34,916 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/step2-klik-buat-akun.png' at (1155, 213) confidence=1.000
+2026-10-24 00:12:38,136 [INFO] visual_autoclicker.mouse: Click left at (652, 416)
+2026-10-24 00:12:38,658 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/3.png' at (652, 416) confidence=0.999
+2026-10-24 00:12:38,959 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 00:12:39,062 [INFO] visual_autoclicker.keyboard: Typing text (length=19)
+2026-10-24 00:16:30,562 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 00:16:30,785 [INFO] visual_autoclicker.mouse: Click left at (657, 485)
+2026-10-24 00:16:31,306 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/4.png' at (657, 485) confidence=1.000

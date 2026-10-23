@@ -1,0 +1,50 @@
+# Visual AutoClicker - Default Configuration
+
+matching:
+  confidence: 0.80          # Minimum match confidence (0.0–1.0)
+  method: TM_CCOEFF_NORMED  # OpenCV template matching method
+  multi_scale: true         # Enable multi-scale matching for DPI/zoom tolerance
+  scale_range: [0.8, 1.2]   # Scale factor range for multi-scale search
+  scale_steps: 5            # Number of scale levels to check
+  grayscale: true           # Convert to grayscale before matching (faster)
+  nms_overlap: 0.5          # Non-maximum suppression overlap threshold
+
+ocr:
+  engine: tesseract          # "tesseract" or "easyocr"
+  lang: eng                  # Tesseract language code (e.g., "ind" for Indonesian)
+  psm: 6                     # Tesseract page segmentation mode
+  scale_factor: 2.0          # Upscale factor before OCR (sharpens small text)
+  preprocess: true           # Apply adaptive threshold preprocessing
+
+capture:
+  monitor: 1                 # Monitor index (1 = primary)
+  region: null               # [left, top, width, height] or null for full screen
+
+actions:
+  click_delay: 0.1           # Seconds to wait after each click
+  type_interval: 0.05        # Seconds between keystrokes
+  scroll_amount: 3           # Scroll units per scroll action
+  move_duration: 0.3         # Mouse move animation duration (0 = instant)
+  human_jitter: false        # Add slight random offset to clicks (anti-detection)
+  jitter_max_px: 3           # Max pixel jitter radius
+
+retry:
+  max_attempts: 5            # Number of retries before giving up
+  delay_between: 1.0         # Seconds to wait between retries
+  timeout: 30.0              # Overall timeout per find operation (seconds)
+
+logging:
+  level: INFO                # DEBUG, INFO, WARNING, ERROR
+  file: logs/autoclicker.log
+  console: true
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+
+debug:
+  save_screenshots: false    # Save annotated screenshot on each match attempt
+  screenshot_dir: debug_screenshots
+  save_on_failure: true      # Always save screenshot when match fails
+  annotate_matches: true     # Draw rectangle around found matches
+
+failsafe:
+  enabled: true              # Move mouse to top-left corner to abort
+  pause: 0.05                # pyautogui global pause between actions

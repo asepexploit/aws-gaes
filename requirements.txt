@@ -1,0 +1,30 @@
+# Visual AutoClicker — Python dependencies
+
+# Core vision
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Fast screen capture (much faster than PIL/pyautogui screenshots)
+mss>=9.0.1
+
+# Desktop input simulation
+pyautogui>=0.9.54
+
+# Configuration
+PyYAML>=6.0.1
+
+# OCR — default engine
+pytesseract>=0.3.10
+
+# Clipboard support for fast text paste
+pyperclip>=1.8.2
+
+# ---- Optional OCR engines ----
+# Install ONE of these if you need better accuracy on noisy/rotated text:
+# easyocr>=1.7.0        # GPU-optional, good accuracy, ~1.5GB model download
+# paddlepaddle>=2.5.0   # Required for PaddleOCR
+# paddleocr>=2.7.0      # Best accuracy, heaviest dependency
+
+# ---- Optional input listener (for global hotkey abort) ----
+# pynput>=1.7.6

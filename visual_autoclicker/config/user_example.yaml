@@ -1,0 +1,30 @@
+# User config example — copy this to 'my_config.yaml' and customize.
+# Values here override the defaults in config/default.yaml.
+
+matching:
+  confidence: 0.78
+  multi_scale: true
+  grayscale: true
+
+ocr:
+  engine: tesseract   # change to "easyocr" for better accuracy on stylized text
+  lang: eng
+
+actions:
+  move_duration: 0.2
+  click_delay: 0.15
+  human_jitter: false
+
+retry:
+  max_attempts: 6
+  delay_between: 1.5
+  timeout: 40.0
+
+logging:
+  level: DEBUG
+  file: logs/run.log
+  console: true
+
+debug:
+  save_screenshots: false
+  save_on_failure: true
