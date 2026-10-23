@@ -10,83 +10,60 @@
 #   otp           = tunggu OTP dari inbox lalu ketik di template ini
 #   sleep:2       = tunggu X detik (tanpa template)
 
-1  -> 1 -> klik
-2  -> step2-klik-buat-akun         -> klik
-3  -> 3                            -> input:EMAIL
-4  -> 4                            -> klik
-5  -> 5,5-01                            -> input:NAMA
-6  -> 6                            -> klik
-7  -> 7                  -> otp
-8  -> 8                  -> klik
-9  -> 9                  -> input:PASSWORD
-10  -> 10                  -> input:PASSWORD
-11  -> 11                  -> klik
-12  -> 12                  -> input:ANDREAS
-13  -> 13                  -> klik
-14  -> 14                  -> input:PHONE
-15  -> 15                  -> klik
+# CHROME
+1  -> chrome-1              -> klik
+2  -> chrome-2              -> klik
+3  -> -                     -> input:BEBAS -> aws free trial -> enter
+
+# AWS SIGNUP
+4  -> 1,1-01,1-02,1-03,1-04                -> klik
+5  -> step2-klik-buat-akun  -> klik
+6  -> 3                     -> input:EMAIL
+7  -> 4                     -> klik
+8  -> 5,5-01                -> input:NAMA
+9  -> 6                     -> klik
+10  -> 7                    -> otp
+11  -> 8                    -> klik
+12  -> 9                    -> input:PASSWORD
+13  -> 10,13-01                   -> input:PASSWORD
+14  -> 11                   -> klik
+15  -> 12                   -> input:ANDREAS
+16  -> 13                   -> klik
+17  -> 14,14-01                   -> input:PHONE
+18  -> 15                   -> klik
 
 # SUDAH DI AWS GAESSSSSSSSSSSSSSSSSS ------
 
-16  -> 16                  -> klik
-17  -> 17                  -> klik
-18  -> 18                  -> klik
+19  -> 16                   -> klik
+20  -> 17                   -> klik
+21  -> 18                   -> klik
 
-# SSEARCHHH
+# SEARCH
 
-19  -> 19                  -> input:BEBAS -> EC2
-20  -> 20                  -> klik
-21  -> 21                  -> klik
+22  -> 19                   -> input:BEBAS -> EC2
+23  -> 20                   -> klik
+24  -> 21                   -> klik
 
-#DI DALAM EC2
+# DI DALAM EC2
 
-22  -> 22                  -> input:BEBAS -> HEHE1
-23  -> 23  -> scroll:down:400
-24  -> 24                  -> klik
-25  -> 25  -> scroll:down:650
-26  -> 28                  -> klik
-27  -> 26                  -> input:BEBAS -> m7i -> false
-28  -> 27                  -> klik
+25  -> 22                   -> input:BEBAS -> HEHE1
+26  -> 23                   -> scroll:down:400
+27  -> 24                   -> klik
+28  -> 25                   -> scroll:down:650
+29  -> 28                   -> klik
+30  -> 26                   -> input:BEBAS -> m7i -> false
+31  -> 27                   -> klik
 
-#CREATE NEW PAIR
+# CREATE NEW PAIR
 
-29  -> 29                  -> klik
-30  -> 30                  -> input:NAMA
-31  -> 31                  -> klik
+32  -> 29                   -> klik
+33  -> 30                   -> input:NAMA
+34  -> 31                   -> klik
 
-#SAVE
-32  -> 32                  -> klik
-33  -> 33  -> scroll:down:10000
-34  -> 34                  -> klik
+# SAVE
+35  -> 32                   -> klik
+36  -> 33                   -> scroll:down:10000
+37  -> 34                   -> klik
 
-#SUDAH DSUCCES CREATE
-35  -> 35                  -> klik
-
-
-# CHROME ASLINYA KE 1 INI ( NANTI UBAH )
-36  -> chrome-1                  -> klik
-37  -> chrome-2                 -> klik
-38  -> -                  -> input:BEBAS -> aws free trial -> enter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# SUDAH SUCCESS CREATE
+38  -> 35                   -> klik
