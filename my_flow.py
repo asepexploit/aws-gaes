@@ -254,7 +254,34 @@ try:
         print(f"  STEP {n}: {template} → {action}")
         print(f"{'='*52}")
 
-        tmpl_path    = f"{T}/{template}.png"
+        # support multi-template: "5,5-01" → coba 5.png atau 5-01.png
+        tmpl_names = [t.strip() for t in template.split(",")]
+        tmpl_path  = f"{T}/{tmpl_names[0]}.png"  # default fallback
+        if len(tmpl_names) > 1:
+            # cari mana yang ada di layar duluan
+            found_tmpl = None
+            deadline = time.time() + 600
+            while time.time() < deadline:
+                for name in tmpl_names:
+                    try:
+                        r = AutoClicker(config_overrides={
+                            "matching": {"confidence": 0.75},
+                            "retry": {"timeout": 1, "max_attempts": 1, "delay_between": 0},
+                            "debug": {"save_on_failure": False},
+                            "logging": {"level": "WARNING"},
+                        }).find_image(f"{T}/{name}.png", timeout=1)
+                        found_tmpl = name
+                        break
+                    except Exception:
+                        pass
+                if found_tmpl:
+                    break
+                time.sleep(1)
+            if found_tmpl:
+                tmpl_path = f"{T}/{found_tmpl}.png"
+                print(f"  ✓ Template ditemukan: {found_tmpl}.png")
+            else:
+                print(f"  ⚠ Tidak ada template yang ditemukan, pakai {tmpl_names[0]}.png")
         act_lower    = action.lower()
         pre_sleep    = s.get("pre_sleep", 0.0)
         skip_detect  = s.get("skip_detect", False)
