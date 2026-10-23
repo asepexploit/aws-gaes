@@ -133,6 +133,7 @@ def poll_otp(email, token, ts) -> str | None:
 
 def parse_variables(path: str = "variables.txt") -> dict:
     vars_ = {}
+    pairs = []  # list of {KEY1: val1, KEY2: val2}
     try:
         with open(path, encoding="utf-8") as f:
             for line in f:
@@ -141,10 +142,19 @@ def parse_variables(path: str = "variables.txt") -> dict:
                     continue
                 if "=" in line:
                     k, v = line.split("=", 1)
-                    choices = [x.strip() for x in v.split("|") if x.strip()]
-                    vars_[k.strip().upper()] = random.choice(choices)
+                    keys = [x.strip().upper() for x in k.split("|")]
+                    vals = [x.strip() for x in v.split("|")]
+                    if len(keys) > 1:
+                        # pasangan: kumpulkan dulu
+                        pairs.append(dict(zip(keys, vals)))
+                    else:
+                        vars_[keys[0]] = vals[0]
     except FileNotFoundError:
         pass
+    # pilih 1 baris pasangan random
+    if pairs:
+        chosen = random.choice(pairs)
+        vars_.update(chosen)
     return vars_
 
 
