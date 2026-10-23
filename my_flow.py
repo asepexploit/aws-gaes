@@ -135,13 +135,23 @@ def parse_flow(path: str) -> list:
             if len(parts) < 3:
                 continue
             action = parts[2]
+            extra  = parts[3] if len(parts) >= 4 else ""
             # Format 4 bagian: input:BEBAS -> nilai bebas
-            if len(parts) == 4 and action.lower() == "input:bebas":
-                action = f"input:{parts[3]}"
+            if extra and action.lower() == "input:bebas":
+                action = f"input:{extra}"
+            # Cek sleep sebelum aksi: klik -> sleep:10
+            pre_sleep = 0.0
+            if extra and extra.lower().startswith("sleep:") and action.lower() != "input:bebas":
+                try:
+                    pre_sleep = float(extra.split(":")[1])
+                except ValueError:
+                    pass
+
             steps.append({
-                "num":      int(parts[0]),
-                "template": parts[1],
-                "action":   action,
+                "num":       int(parts[0]),
+                "template":  parts[1],
+                "action":    action,
+                "pre_sleep": pre_sleep,
             })
     return sorted(steps, key=lambda x: x["num"])
 
@@ -193,10 +203,21 @@ try:
 
         tmpl_path = f"{T}/{template}.png"
         act_lower = action.lower()
+        pre_sleep = s.get("pre_sleep", 0.0)
+        if pre_sleep > 0:
+            print(f"  ⏳ Tunggu {pre_sleep}s sebelum aksi...")
+            time.sleep(pre_sleep)
 
         # ── klik saja ──
-        if act_lower in ("klik", "continue", "click"):
-            ac.click_image(tmpl_path, timeout=20)
+        # support: klik, klik:timeout:60
+        if act_lower.startswith("klik") or act_lower in ("continue", "click"):
+            timeout = 20
+            if "timeout:" in act_lower:
+                try:
+                    timeout = int(act_lower.split("timeout:")[1])
+                except ValueError:
+                    pass
+            ac.click_image(tmpl_path, timeout=timeout)
             print("  ✓ Klik selesai")
             time.sleep(1.5)
 
