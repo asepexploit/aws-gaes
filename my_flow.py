@@ -108,6 +108,22 @@ def poll_otp(email, token, ts) -> str | None:
     return None
 
 
+def parse_variables(path: str = "variables.txt") -> dict:
+    vars_ = {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if "=" in line:
+                    k, v = line.split("=", 1)
+                    vars_[k.strip().upper()] = v.strip()
+    except FileNotFoundError:
+        pass
+    return vars_
+
+
 def parse_flow(path: str) -> list:
     steps = []
     with open(path, encoding="utf-8") as f:
@@ -129,6 +145,7 @@ def parse_flow(path: str) -> list:
 # ─── MAIN ─────────────────────────────────────────────────
 try:
     steps = parse_flow(args.flow)
+    VARS  = parse_variables()
     print(f"\n▶ Flow: {args.flow}  ({len(steps)} steps)")
     print(f"▶ Jalankan step {START} {'saja' if END == START else f'sampai {END}'}\n")
 
@@ -182,12 +199,15 @@ try:
         # ── input teks biasa ──
         elif act_lower.startswith("input:"):
             nilai = action.split(":", 1)[1]
-            if nilai.upper() == "EMAIL":
+            key   = nilai.upper()
+            if key == "EMAIL":
                 nilai = EMAIL
-            elif nilai.upper() == "NAMA":
+            elif key == "NAMA":
                 nilai = NAMA
-            elif nilai.upper() == "PASSWORD":
+            elif key == "PASSWORD":
                 nilai = PASSWORD
+            elif key in VARS:
+                nilai = VARS[key]
             ac.click_image(tmpl_path, timeout=15)
             time.sleep(0.3)
             ac.hotkey("ctrl", "a")
