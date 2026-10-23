@@ -151,13 +151,20 @@ def parse_flow(path: str) -> list:
             action = parts[2]
             extra  = parts[3] if len(parts) >= 4 else ""
             extra2 = parts[4] if len(parts) >= 5 else ""
-            # Format 4 bagian: input:BEBAS -> nilai bebas
+            extra3 = parts[5] if len(parts) >= 6 else ""
+            # Format input:BEBAS -> nilai -> [false/enter/...]
+            press_enter = False
             if extra and action.lower() == "input:bebas":
                 action = f"input:{extra}"
-                extra  = extra2  # geser: extra2 jadi extra (misal "false")
+                extra  = extra2
+                extra3 = extra3
+            # Cek enter: -> enter di posisi extra atau extra3
+            for ex in (extra, extra3):
+                if ex.lower() == "enter":
+                    press_enter = True
             # Cek sleep sebelum aksi: klik -> sleep:10
             pre_sleep = 0.0
-            if extra and extra.lower().startswith("sleep:") and action.lower() != "input:bebas":
+            if extra and extra.lower().startswith("sleep:"):
                 try:
                     pre_sleep = float(extra.split(":")[1])
                 except ValueError:
@@ -171,6 +178,7 @@ def parse_flow(path: str) -> list:
                 "action":      action,
                 "pre_sleep":   pre_sleep,
                 "skip_detect": skip_detect,
+                "press_enter": press_enter,
             })
     return sorted(steps, key=lambda x: x["num"])
 
@@ -285,6 +293,7 @@ try:
         act_lower    = action.lower()
         pre_sleep    = s.get("pre_sleep", 0.0)
         skip_detect  = s.get("skip_detect", False) or template.strip() == "-"
+        press_enter  = s.get("press_enter", False)
         if pre_sleep > 0:
             print(f"  ⏳ Tunggu {pre_sleep}s sebelum aksi...")
             time.sleep(pre_sleep)
@@ -319,7 +328,11 @@ try:
                 time.sleep(0.3)
             ac.hotkey("ctrl", "a")
             ac.type(nilai)
-            print(f"  ✓ Input: {nilai}")
+            if press_enter:
+                ac.press("enter")
+                print(f"  ✓ Input: {nilai} + Enter")
+            else:
+                print(f"  ✓ Input: {nilai}")
             time.sleep(0.5)
 
         # ── OTP ──
