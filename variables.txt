@@ -1,9 +1,9 @@
 # Variabel custom — bisa dipakai di flow.txt dengan input:NAMA_VARIABEL
 # Format: NAMA_VARIABEL = nilai
 
-ANDREAS  = 13503 HEALDSBU
+ANDREAS  = PO Box 1387
 KOTA     = Washington
 NEGARA   = United States
 KODEPOS  = 20001
 TELEPON  = 2025550123
-PHONE    = 7074338304
+PHONE    = 7074338389
