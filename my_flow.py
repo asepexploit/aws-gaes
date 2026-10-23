@@ -197,8 +197,8 @@ try:
             time.sleep(secs)
             continue
 
-        # ── scroll tanpa template ──
-        if action.lower().startswith("scroll:"):
+        # ── scroll tanpa template (pakai - sebagai template) ──
+        if action.lower().startswith("scroll:") and template.strip() == "-":
             import pyautogui as _pg
             parts_s = action.lower().split(":")
             direction = parts_s[1] if len(parts_s) > 1 else "down"
@@ -252,6 +252,17 @@ try:
             time.sleep(0.5)
 
         # ── OTP ──
+        # ── scroll dengan template (klik dulu baru scroll) ──
+        elif act_lower.startswith("scroll:"):
+            parts_s = act_lower.split(":")
+            direction = parts_s[1] if len(parts_s) > 1 else "down"
+            amount = int(parts_s[2]) if len(parts_s) > 2 else 3
+            ac.click_image(tmpl_path, timeout=15)
+            time.sleep(0.5)
+            ac.scroll_at_image(tmpl_path, amount=amount, direction=direction, timeout=5)
+            print(f"  ✓ Scroll {direction} x{amount}")
+            time.sleep(0.5)
+
         elif act_lower == "otp":
             if args.skipemail:
                 otp = input("  Masukkan OTP yang diterima di email: ").strip()
