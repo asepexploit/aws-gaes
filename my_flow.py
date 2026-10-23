@@ -136,9 +136,11 @@ def parse_flow(path: str) -> list:
                 continue
             action = parts[2]
             extra  = parts[3] if len(parts) >= 4 else ""
+            extra2 = parts[4] if len(parts) >= 5 else ""
             # Format 4 bagian: input:BEBAS -> nilai bebas
             if extra and action.lower() == "input:bebas":
                 action = f"input:{extra}"
+                extra  = extra2  # geser: extra2 jadi extra (misal "false")
             # Cek sleep sebelum aksi: klik -> sleep:10
             pre_sleep = 0.0
             if extra and extra.lower().startswith("sleep:") and action.lower() != "input:bebas":
@@ -146,12 +148,15 @@ def parse_flow(path: str) -> list:
                     pre_sleep = float(extra.split(":")[1])
                 except ValueError:
                     pass
+            # Cek skip deteksi template: -> false
+            skip_detect = extra.lower() == "false"
 
             steps.append({
-                "num":       int(parts[0]),
-                "template":  parts[1],
-                "action":    action,
-                "pre_sleep": pre_sleep,
+                "num":         int(parts[0]),
+                "template":    parts[1],
+                "action":      action,
+                "pre_sleep":   pre_sleep,
+                "skip_detect": skip_detect,
             })
     return sorted(steps, key=lambda x: x["num"])
 
@@ -212,9 +217,10 @@ try:
         print(f"  STEP {n}: {template} → {action}")
         print(f"{'='*52}")
 
-        tmpl_path = f"{T}/{template}.png"
-        act_lower = action.lower()
-        pre_sleep = s.get("pre_sleep", 0.0)
+        tmpl_path    = f"{T}/{template}.png"
+        act_lower    = action.lower()
+        pre_sleep    = s.get("pre_sleep", 0.0)
+        skip_detect  = s.get("skip_detect", False)
         if pre_sleep > 0:
             print(f"  ⏳ Tunggu {pre_sleep}s sebelum aksi...")
             time.sleep(pre_sleep)
@@ -244,8 +250,9 @@ try:
                 nilai = PASSWORD
             elif key in VARS:
                 nilai = VARS[key]
-            ac.click_image(tmpl_path, timeout=600)
-            time.sleep(0.3)
+            if not skip_detect:
+                ac.click_image(tmpl_path, timeout=600)
+                time.sleep(0.3)
             ac.hotkey("ctrl", "a")
             ac.type(nilai)
             print(f"  ✓ Input: {nilai}")
