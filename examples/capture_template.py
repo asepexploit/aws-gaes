@@ -165,6 +165,8 @@ def main():
     parser.add_argument("--step", type=int, required=True, help="Nomor step di flow")
     parser.add_argument("--sleep", type=float, default=1.5,
                         help="Jeda (detik) setelah klik step ini (default: 1.5)")
+    parser.add_argument("--jeda", type=int, default=0,
+                        help="Jeda detik sebelum screenshot (biar sempat arahkan layar)")
     parser.add_argument("--out-dir", default=str(TEMPLATES_DIR))
     args = parser.parse_args()
 
@@ -173,7 +175,15 @@ def main():
     out_path = out_dir / f"{args.name}.png"
 
     print(f"\n📸 Capture template: {args.name}  (Step {args.step})")
-    print("  Gambar kotak di sekitar elemen → ENTER untuk simpan\n")
+
+    if args.jeda > 0:
+        print(f"  ⏳ Jeda {args.jeda} detik — arahkan ke halaman yang mau di-capture...")
+        for i in range(args.jeda, 0, -1):
+            print(f"     {i}...", end="\r")
+            time.sleep(1)
+        print("  ✓ Mulai capture!\n")
+    else:
+        print("  Gambar kotak di sekitar elemen → ENTER untuk simpan\n")
 
     result = capture_region_interactive()
     if result is None:
