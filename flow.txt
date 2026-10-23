@@ -14,7 +14,7 @@
 2  -> step2-klik-buat-akun         -> klik
 3  -> 3                            -> input:EMAIL
 4  -> 4                            -> klik
-5  -> 5                            -> input:NAMA
+5  -> 5,5-01                            -> input:NAMA
 6  -> 6                            -> klik
 7  -> 7                  -> otp
 8  -> 8                  -> klik
@@ -63,8 +63,10 @@
 35  -> 35                  -> klik
 
 
-
-
+# CHROME ASLINYA KE 1 INI ( NANTI UBAH )
+36  -> chrome-1                  -> klik
+37  -> chrome-2                 -> klik
+38  -> -                  -> input:BEBAS -> aws free trial -> enter
 
 
 
