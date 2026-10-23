@@ -63,7 +63,7 @@ def _api(action: str, params: dict = {}, retries: int = 5) -> dict:
     last_err = None
     for attempt in range(1, retries + 1):
         try:
-            with urllib.request.urlopen(req, timeout=20) as r:
+            with urllib.request.urlopen(req, timeout=60) as r:
                 data = json.loads(r.read())
             if not data.get("ok"):
                 raise RuntimeError(data.get("error", "API error"))
