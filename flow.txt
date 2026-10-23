@@ -16,7 +16,7 @@
 3  -> -                     -> input:BEBAS -> aws free trial -> enter
 
 # AWS SIGNUP
-4  -> 1,1-01,1-02,1-03,1-04                -> klik
+4  -> 1,1-01,1-02,1-03,1-04,1-05                -> klik
 5  -> step2-klik-buat-akun  -> klik
 6  -> 3,3-01                     -> input:EMAIL
 7  -> 4                     -> klik
