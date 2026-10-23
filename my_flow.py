@@ -20,9 +20,12 @@ from visual_autoclicker import AutoClicker, ElementNotFoundError
 
 # ─── Parse argumen ────────────────────────────────────────
 parser = argparse.ArgumentParser()
-parser.add_argument("--step", type=int, default=1)
-parser.add_argument("--end",  type=int, default=99)
-parser.add_argument("--flow", default="flow.txt")
+parser.add_argument("--step",      type=int, default=1)
+parser.add_argument("--end",       type=int, default=99)
+parser.add_argument("--flow",      default="flow.txt")
+parser.add_argument("--skipemail", action="store_true", help="Skip generate email, pakai dummy")
+parser.add_argument("--email",     default="example@gmail.com", help="Email dummy saat --skipemail")
+parser.add_argument("--otp",       default="123123",            help="OTP dummy saat --skipemail")
 args = parser.parse_args()
 
 START = args.step
@@ -136,7 +139,11 @@ try:
         s["action"].upper() in ("INPUT:EMAIL", "OTP")
         for s in steps if START <= s["num"] <= END
     )
-    if needs_email:
+    if args.skipemail:
+        EMAIL = args.email
+        print(f"⏭ Skip generate email → pakai: {EMAIL}")
+        print(f"⏭ OTP dummy           → pakai: {args.otp}")
+    elif needs_email:
         print("📧 Generate email tempmail...")
         d           = create_email()
         EMAIL       = d["email"]
@@ -191,10 +198,14 @@ try:
 
         # ── OTP ──
         elif act_lower == "otp":
-            otp = poll_otp(EMAIL, EMAIL_TOKEN, EMAIL_TS)
-            if not otp:
-                raise ElementNotFoundError("OTP tidak datang dalam 80 detik")
-            print(f"  ✓ OTP: {otp}")
+            if args.skipemail:
+                otp = args.otp
+                print(f"  ⏭ OTP dummy: {otp}")
+            else:
+                otp = poll_otp(EMAIL, EMAIL_TOKEN, EMAIL_TS)
+                if not otp:
+                    raise ElementNotFoundError("OTP tidak datang dalam 80 detik")
+                print(f"  ✓ OTP: {otp}")
             ac.click_image(tmpl_path, timeout=15)
             time.sleep(0.3)
             ac.hotkey("ctrl", "a")
