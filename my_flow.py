@@ -197,6 +197,17 @@ try:
             time.sleep(secs)
             continue
 
+        # ── scroll tanpa template ──
+        if action.lower().startswith("scroll:"):
+            import pyautogui as _pg
+            parts_s = action.lower().split(":")
+            direction = parts_s[1] if len(parts_s) > 1 else "down"
+            amount = int(parts_s[2]) if len(parts_s) > 2 else 3
+            cx, cy = _pg.size()
+            ac.scroll(cx // 2, cy // 2, amount=amount, direction=direction)
+            print(f"\n  [STEP {n}] Scroll {direction} x{amount}")
+            continue
+
         print(f"\n{'='*52}")
         print(f"  STEP {n}: {template} → {action}")
         print(f"{'='*52}")
