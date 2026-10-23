@@ -45,15 +45,19 @@
 24  -> 24                  -> klik
 25  -> 25  -> scroll:down:650
 26  -> 28                  -> klik
-27  -> 26                  -> klik
-28  -> 27                  -> input:BEBAS -> m7i
+27  -> 26                  -> input:BEBAS -> m7i -> false
+28  -> 27                  -> klik
 
+#CREATE NEW PAIR
 
+29  -> 29                  -> klik
+30  -> 30                  -> input:NAMA
+31  -> 31                  -> klik
 
-
-
-
-
+#SAVE
+32  -> 32                  -> klik
+33  -> 33  -> scroll:down:10000
+34  -> 34                  -> klik
 
 
 
