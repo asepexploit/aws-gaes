@@ -257,7 +257,10 @@ try:
             parts_s = act_lower.split(":")
             direction = parts_s[1] if len(parts_s) > 1 else "down"
             amount = int(parts_s[2]) if len(parts_s) > 2 else 3
+            import pyautogui as _pg
             result = ac.find_image(tmpl_path, timeout=15)
+            _pg.click(result.x, result.y)
+            time.sleep(0.5)
             ac.scroll(result.x, result.y, amount=amount, direction=direction)
             print(f"  ✓ Scroll {direction} x{amount}")
             time.sleep(0.5)
