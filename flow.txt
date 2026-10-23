@@ -57,13 +57,14 @@
 # CREATE NEW PAIR
 
 32  -> 29                   -> klik
-33  -> 30                   -> input:NAMA
-34  -> 31                   -> klik
+33  -> -                    -> sleep:30
+34  -> 30                   -> input:NAMA
+35  -> 31                   -> klik
 
 # SAVE
-35  -> 32                   -> klik
-36  -> 33                   -> scroll:down:10000
-37  -> 34                   -> klik
+36  -> 32                   -> klik
+37  -> 33                   -> scroll:down:10000
+38  -> 34                   -> klik
 
 # SUDAH SUCCESS CREATE
-38  -> 35                   -> klik
+39  -> 35                   -> klik
