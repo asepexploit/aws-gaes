@@ -252,12 +252,14 @@ try:
             time.sleep(0.5)
 
         # ── OTP ──
-        # ── scroll dengan template (klik fokus dulu, lalu scroll di posisi itu) ──
+        # ── scroll dengan template (klik dulu baru scroll di posisi sama) ──
         elif act_lower.startswith("scroll:"):
             parts_s = act_lower.split(":")
             direction = parts_s[1] if len(parts_s) > 1 else "down"
             amount = int(parts_s[2]) if len(parts_s) > 2 else 3
             result = ac.find_image(tmpl_path, timeout=15)
+            ac.click(result.x, result.y)
+            time.sleep(0.5)
             ac.scroll(result.x, result.y, amount=amount, direction=direction)
             print(f"  ✓ Scroll {direction} x{amount}")
             time.sleep(0.5)
