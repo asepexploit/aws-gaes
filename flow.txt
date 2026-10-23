@@ -37,8 +37,16 @@
 19  -> 19                  -> input:BEBAS -> EC2
 20  -> 20                  -> klik
 21  -> 21                  -> klik
-22  -> 22                  -> input:BEBAS -> HEHE1
 
+#DI DALAM EC2
+
+22  -> 22                  -> input:BEBAS -> HEHE1
+23  -> 23  -> scroll:down:400
+#24  -> 24                  -> klik
+25  -> 25  -> scroll:down:650
+26  -> 28                  -> klik
+27  -> 26                  -> klik
+28  -> 27                  -> input:BEBAS -> m7i
 
 
 
