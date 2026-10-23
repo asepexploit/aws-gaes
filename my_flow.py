@@ -24,7 +24,7 @@ parser.add_argument("--step",      type=int, default=1)
 parser.add_argument("--end",       type=int, default=99)
 parser.add_argument("--flow",      default="flow.txt")
 parser.add_argument("--skipemail", action="store_true", help="Skip generate email, pakai dummy")
-parser.add_argument("--email",     default="example@gmail.com", help="Email dummy saat --skipemail")
+parser.add_argument("--email",     default="example@gmail.com", help="Email dummy saat --skipemail, atau 'success' untuk random dari email.txt")
 parser.add_argument("--otp",       default="123123",            help="OTP dummy saat --skipemail")
 args = parser.parse_args()
 
@@ -47,6 +47,19 @@ ac = AutoClicker(config_overrides={
 
 
 # ─── Helpers ──────────────────────────────────────────────
+def random_email_from_file(path: str = "email.txt") -> str:
+    try:
+        with open(path, encoding="utf-8") as f:
+            domains = [l.strip() for l in f if l.strip()]
+        if not domains:
+            raise ValueError("email.txt kosong")
+        domain = random.choice(domains)
+        username = "".join(random.choices("abcdefghijklmnopqrstuvwxyz0123456789", k=10))
+        return f"{username}@{domain}"
+    except FileNotFoundError:
+        raise RuntimeError("email.txt tidak ditemukan")
+
+
 def random_name() -> str:
     first = ["James","John","Robert","Michael","William","David","Richard",
              "Emily","Emma","Olivia","Sophia","Charlotte","Amelia","Harper"]
@@ -176,8 +189,12 @@ try:
         for s in steps if START <= s["num"] <= END
     )
     if args.skipemail and needs_email:
-        EMAIL = input("  Masukkan email: ").strip()
-        print(f"  ✓ Email : {EMAIL}")
+        if args.email.lower() == "success":
+            EMAIL = random_email_from_file()
+            print(f"  ✓ Email (dari email.txt): {EMAIL}")
+        else:
+            EMAIL = input("  Masukkan email: ").strip()
+            print(f"  ✓ Email : {EMAIL}")
     elif needs_email:
         print("📧 Generate email tempmail...")
         d           = create_email()
