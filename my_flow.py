@@ -190,9 +190,23 @@ try:
         for s in steps if START <= s["num"] <= END
     )
     if args.email.lower() == "success" and needs_email:
-        domain = random_domain_from_file()
-        print(f"📧 Generate email dengan domain: {domain}...")
-        d           = create_email(prefer_domain=domain)
+        try:
+            domains = open("email.txt", encoding="utf-8").read().splitlines()
+            domains = [d.strip() for d in domains if d.strip()]
+        except FileNotFoundError:
+            domains = []
+        random.shuffle(domains)
+        d = None
+        for domain in domains:
+            try:
+                print(f"📧 Generate email dengan domain: {domain}...")
+                d = create_email(prefer_domain=domain)
+                break
+            except Exception as e:
+                print(f"  ⚠ Domain {domain} gagal: {e}, coba domain lain...")
+        if not d:
+            print("📧 Semua domain gagal, coba tanpa prefer_domain...")
+            d = create_email()
         EMAIL       = d["email"]
         EMAIL_TOKEN = d.get("account_token", "")
         EMAIL_TS    = d.get("ts", "")
