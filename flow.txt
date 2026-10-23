@@ -1,0 +1,19 @@
+# Flow AWS signup
+# Format: nomor -> nama_template -> aksi
+# Aksi yang tersedia:
+#   klik          = klik template
+#   input:teks    = klik template lalu ketik teks
+#   input:EMAIL   = klik template lalu ketik email tempmail (auto generate)
+#   input:NAMA    = klik template lalu ketik nama random
+#   input:PASSWORD= klik template lalu ketik password
+#   continue      = klik template (alias klik, untuk tombol next/continue)
+#   otp           = tunggu OTP dari inbox lalu ketik di template ini
+#   sleep:2       = tunggu X detik (tanpa template)
+
+1  -> step1-klik-google-search-aws -> klik
+2  -> step2-klik-buat-akun         -> klik
+3  -> 3                            -> input:EMAIL
+4  -> 4                            -> klik
+5  -> 5                            -> input:NAMA
+6  -> 6                            -> klik
+7  -> 7-otp-field                  -> otp
