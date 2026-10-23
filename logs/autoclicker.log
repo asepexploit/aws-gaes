@@ -351,3 +351,53 @@
 2026-10-24 03:22:41,561 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/28.png' at (291, 556) confidence=0.993
 2026-10-24 03:22:47,673 [INFO] visual_autoclicker.mouse: Click left at (535, 630)
 2026-10-24 03:22:49,279 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/26.png' at (535, 630) confidence=0.994
+2026-10-24 03:24:11,514 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 03:24:13,569 [INFO] visual_autoclicker.mouse: Scroll down x400 at (195,371)
+2026-10-24 03:24:16,179 [INFO] visual_autoclicker.mouse: Scroll down x650 at (137,440)
+2026-10-24 03:24:17,730 [INFO] visual_autoclicker.mouse: Click left at (291, 556)
+2026-10-24 03:24:19,340 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/28.png' at (291, 556) confidence=0.993
+2026-10-24 03:24:25,202 [INFO] visual_autoclicker.mouse: Click left at (535, 630)
+2026-10-24 03:24:26,815 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/26.png' at (535, 630) confidence=0.986
+2026-10-24 03:28:56,067 [INFO] visual_autoclicker: AutoClicker initialized (engine=tesseract, confidence=0.75)
+2026-10-24 03:29:02,275 [INFO] visual_autoclicker.mouse: Click left at (177, 616)
+2026-10-24 03:29:04,724 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/step2-klik-buat-akun.png' at (177, 616) confidence=0.795
+2026-10-24 03:29:07,604 [INFO] visual_autoclicker.mouse: Click left at (706, 422)
+2026-10-24 03:29:09,245 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/3.png' at (706, 422) confidence=0.999
+2026-10-24 03:29:09,548 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:29:09,656 [INFO] visual_autoclicker.keyboard: Typing text (length=17)
+2026-10-24 03:29:12,013 [INFO] visual_autoclicker.mouse: Click left at (716, 488)
+2026-10-24 03:29:13,679 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/4.png' at (716, 488) confidence=1.000
+2026-10-24 03:29:20,653 [INFO] visual_autoclicker.mouse: Click left at (712, 643)
+2026-10-24 03:29:22,252 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/5.png' at (712, 643) confidence=0.759
+2026-10-24 03:29:22,562 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:29:22,669 [INFO] visual_autoclicker.keyboard: Typing text (length=16)
+2026-10-24 03:29:25,161 [INFO] visual_autoclicker.mouse: Click left at (712, 708)
+2026-10-24 03:29:26,806 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/6.png' at (712, 708) confidence=1.000
+2026-10-24 03:30:31,043 [INFO] visual_autoclicker.mouse: Click left at (611, 663)
+2026-10-24 03:30:32,800 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/7.png' at (611, 663) confidence=0.995
+2026-10-24 03:30:33,102 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:30:33,210 [INFO] visual_autoclicker.keyboard: Typing text (length=6)
+2026-10-24 03:30:37,666 [INFO] visual_autoclicker.mouse: Click left at (715, 769)
+2026-10-24 03:30:39,277 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/8.png' at (715, 769) confidence=1.000
+2026-10-24 03:30:45,316 [INFO] visual_autoclicker.mouse: Click left at (711, 580)
+2026-10-24 03:30:46,923 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/9.png' at (711, 580) confidence=0.817
+2026-10-24 03:30:47,224 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:30:47,331 [INFO] visual_autoclicker.keyboard: Typing text (length=11)
+2026-10-24 03:30:49,470 [INFO] visual_autoclicker.mouse: Click left at (723, 677)
+2026-10-24 03:30:51,068 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/10.png' at (723, 677) confidence=0.990
+2026-10-24 03:30:51,370 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:30:51,476 [INFO] visual_autoclicker.keyboard: Typing text (length=11)
+2026-10-24 03:30:53,428 [INFO] visual_autoclicker.mouse: Click left at (714, 771)
+2026-10-24 03:30:55,048 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/11.png' at (714, 771) confidence=1.000
+2026-10-24 03:31:07,705 [INFO] visual_autoclicker.mouse: Click left at (710, 595)
+2026-10-24 03:31:09,309 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/12.png' at (710, 595) confidence=0.997
+2026-10-24 03:31:09,612 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:31:09,724 [INFO] visual_autoclicker.keyboard: Typing text (length=15)
+2026-10-24 03:31:12,284 [INFO] visual_autoclicker.mouse: Click left at (713, 642)
+2026-10-24 03:31:13,899 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/13.png' at (713, 642) confidence=0.990
+2026-10-24 03:31:16,264 [INFO] visual_autoclicker.mouse: Click left at (802, 833)
+2026-10-24 03:31:17,877 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/14.png' at (802, 833) confidence=0.998
+2026-10-24 03:31:18,190 [INFO] visual_autoclicker.keyboard: Hotkey: ctrl+a
+2026-10-24 03:31:18,298 [INFO] visual_autoclicker.keyboard: Typing text (length=12)
+2026-10-24 03:31:20,553 [INFO] visual_autoclicker.mouse: Click left at (709, 894)
+2026-10-24 03:31:22,160 [INFO] visual_autoclicker: Clicked image 'visual_autoclicker/templates/15.png' at (709, 894) confidence=1.000

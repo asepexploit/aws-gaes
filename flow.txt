@@ -42,7 +42,7 @@
 
 22  -> 22                  -> input:BEBAS -> HEHE1
 23  -> 23  -> scroll:down:400
-#24  -> 24                  -> klik
+24  -> 24                  -> klik
 25  -> 25  -> scroll:down:650
 26  -> 28                  -> klik
 27  -> 26                  -> klik
