@@ -6,3 +6,4 @@ KOTA     = Washington
 NEGARA   = United States
 KODEPOS  = 20001
 TELEPON  = 2025550123
+PHONE    = 608-222-2247
