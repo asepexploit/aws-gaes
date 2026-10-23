@@ -189,19 +189,18 @@ try:
         s["action"].upper() in ("INPUT:EMAIL", "OTP")
         for s in steps if START <= s["num"] <= END
     )
-    if args.skipemail and needs_email:
-        if args.email.lower() == "success":
-            domain = random_domain_from_file()
-            print(f"📧 Generate email dengan domain: {domain}...")
-            d           = create_email(prefer_domain=domain)
-            EMAIL       = d["email"]
-            EMAIL_TOKEN = d.get("account_token", "")
-            EMAIL_TS    = d.get("ts", "")
-            print(f"  ✓ Email : {EMAIL}")
-            print(f"  ✓ Nama  : {NAMA}")
-        else:
-            EMAIL = input("  Masukkan email: ").strip()
-            print(f"  ✓ Email : {EMAIL}")
+    if args.email.lower() == "success" and needs_email:
+        domain = random_domain_from_file()
+        print(f"📧 Generate email dengan domain: {domain}...")
+        d           = create_email(prefer_domain=domain)
+        EMAIL       = d["email"]
+        EMAIL_TOKEN = d.get("account_token", "")
+        EMAIL_TS    = d.get("ts", "")
+        print(f"  ✓ Email : {EMAIL}")
+        print(f"  ✓ Nama  : {NAMA}")
+    elif args.skipemail and needs_email:
+        EMAIL = input("  Masukkan email: ").strip()
+        print(f"  ✓ Email : {EMAIL}")
     elif needs_email:
         print("📧 Generate email tempmail...")
         d           = create_email()
