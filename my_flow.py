@@ -140,9 +140,8 @@ try:
         for s in steps if START <= s["num"] <= END
     )
     if args.skipemail:
-        EMAIL = args.email
-        print(f"⏭ Skip generate email → pakai: {EMAIL}")
-        print(f"⏭ OTP dummy           → pakai: {args.otp}")
+        EMAIL = input("  Masukkan email: ").strip()
+        print(f"  ✓ Email : {EMAIL}")
     elif needs_email:
         print("📧 Generate email tempmail...")
         d           = create_email()
@@ -199,8 +198,8 @@ try:
         # ── OTP ──
         elif act_lower == "otp":
             if args.skipemail:
-                otp = args.otp
-                print(f"  ⏭ OTP dummy: {otp}")
+                otp = input("  Masukkan OTP yang diterima di email: ").strip()
+                print(f"  ✓ OTP : {otp}")
             else:
                 otp = poll_otp(EMAIL, EMAIL_TOKEN, EMAIL_TS)
                 if not otp:
