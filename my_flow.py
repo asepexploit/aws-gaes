@@ -158,6 +158,14 @@ def parse_variables(path: str = "variables.txt") -> dict:
     return vars_
 
 
+def parse_step_num(s: str):
+    """Parse '19b' → (19, 'b'), '19' → (19, '')"""
+    m = re.match(r'^(\d+)([a-z]*)$', s.strip().lower())
+    if not m:
+        raise ValueError(f"Nomor step tidak valid: {s!r}")
+    return int(m.group(1)), m.group(2)
+
+
 def parse_flow(path: str) -> list:
     steps = []
     with open(path, encoding="utf-8") as f:
@@ -167,6 +175,10 @@ def parse_flow(path: str) -> list:
                 continue
             parts = [p.strip() for p in line.split("->")]
             if len(parts) < 3:
+                continue
+            try:
+                num_int, num_suffix = parse_step_num(parts[0])
+            except ValueError:
                 continue
             action = parts[2]
             extra  = parts[3] if len(parts) >= 4 else ""
@@ -191,16 +203,26 @@ def parse_flow(path: str) -> list:
                     pass
             # Cek skip deteksi template: -> false
             skip_detect = extra.lower() == "false"
+            # if_found:STEP — tidak perlu extra parsing di sini
+            if_found_step = None
+            if action.lower().startswith("if_found:"):
+                try:
+                    if_found_step = int(action.split(":")[1])
+                except ValueError:
+                    pass
 
             steps.append({
-                "num":         int(parts[0]),
-                "template":    parts[1],
-                "action":      action,
-                "pre_sleep":   pre_sleep,
-                "skip_detect": skip_detect,
-                "press_enter": press_enter,
+                "num":          num_int,
+                "num_suffix":   num_suffix,
+                "template":     parts[1],
+                "action":       action,
+                "pre_sleep":    pre_sleep,
+                "skip_detect":  skip_detect,
+                "press_enter":  press_enter,
+                "if_found_step": if_found_step,
             })
-    return sorted(steps, key=lambda x: x["num"])
+    # sort: num naik, suffix naik ('' < 'a' < 'b' ...)
+    return sorted(steps, key=lambda x: (x["num"], x["num_suffix"]))
 
 
 # ─── MAIN ─────────────────────────────────────────────────
@@ -257,20 +279,48 @@ try:
         print(f"  ✓ Email : {EMAIL}")
         print(f"  ✓ Nama  : {NAMA}")
 
+    # buat index step by num untuk lookup if_found
+    steps_by_num = {}
     for s in steps:
+        steps_by_num.setdefault(s["num"], []).append(s)
+
+    def run_step(s):
+        """Jalankan satu step, return True kalau berhasil."""
         n        = s["num"]
         template = s["template"]
         action   = s["action"]
 
-        if not (START <= n <= END):
-            continue
+        # ── if_found: cek gambar sekali, kalau ada → jalankan target step ──
+        if s.get("if_found_step") is not None:
+            target_step_num = s["if_found_step"]
+            tmpl_names = [t.strip() for t in template.split(",")]
+            found = False
+            for name in tmpl_names:
+                try:
+                    AutoClicker(config_overrides={
+                        "matching": {"confidence": 0.75},
+                        "retry": {"timeout": 3, "max_attempts": 1, "delay_between": 0},
+                        "debug": {"save_on_failure": False},
+                        "logging": {"level": "WARNING"},
+                    }).find_image(f"{T}/{name}.png", timeout=3)
+                    found = True
+                    break
+                except Exception:
+                    pass
+            if found:
+                print(f"\n  [STEP {n}{s['num_suffix']}] if_found → gambar ditemukan, jalankan step {target_step_num}")
+                for target_s in steps_by_num.get(target_step_num, []):
+                    run_step(target_s)
+            else:
+                print(f"\n  [STEP {n}{s['num_suffix']}] if_found → gambar tidak ada, lanjut")
+            return True
 
         # ── sleep tanpa template ──
         if action.lower().startswith("sleep:"):
             secs = float(action.split(":")[1])
             print(f"\n  [STEP {n}] Tunggu {secs}s...")
             time.sleep(secs)
-            continue
+            return True
 
         # ── scroll tanpa template (pakai - sebagai template) ──
         if action.lower().startswith("scroll:") and template.strip() == "-":
@@ -281,7 +331,7 @@ try:
             cx, cy = _pg.size()
             ac.scroll(cx // 2, cy // 2, amount=amount, direction=direction)
             print(f"\n  [STEP {n}] Scroll {direction} x{amount}")
-            continue
+            return True
 
         print(f"\n{'='*52}")
         print(f"  STEP {n}: {template} → {action}")
@@ -291,13 +341,12 @@ try:
         tmpl_names = [t.strip() for t in template.split(",")]
         tmpl_path  = f"{T}/{tmpl_names[0]}.png"  # default fallback
         if len(tmpl_names) > 1:
-            # cari mana yang ada di layar duluan
             found_tmpl = None
             deadline = time.time() + 600
             while time.time() < deadline:
                 for name in tmpl_names:
                     try:
-                        r = AutoClicker(config_overrides={
+                        AutoClicker(config_overrides={
                             "matching": {"confidence": 0.75},
                             "retry": {"timeout": 1, "max_attempts": 1, "delay_between": 0},
                             "debug": {"save_on_failure": False},
@@ -324,7 +373,6 @@ try:
             time.sleep(pre_sleep)
 
         # ── klik saja ──
-        # support: klik, klik:timeout:60
         if act_lower.startswith("klik") or act_lower in ("continue", "click"):
             timeout = 600
             if "timeout:" in act_lower:
@@ -360,7 +408,6 @@ try:
                 print(f"  ✓ Input: {nilai}")
             time.sleep(0.5)
 
-        # ── OTP ──
         # ── scroll dengan template (klik dulu baru scroll di posisi sama) ──
         elif act_lower.startswith("scroll:"):
             parts_s = act_lower.split(":")
@@ -390,19 +437,15 @@ try:
             print("  ✓ OTP diisi")
             time.sleep(3)
 
-        # ── scroll ──
-        elif act_lower.startswith("scroll:"):
-            parts_s = act_lower.split(":")
-            direction = parts_s[1] if len(parts_s) > 1 else "down"
-            amount = int(parts_s[2]) if len(parts_s) > 2 else 3
-            import pyautogui as _pg
-            cx, cy = _pg.size()
-            ac.scroll(cx // 2, cy // 2, amount=amount, direction=direction)
-            print(f"  ✓ Scroll {direction} x{amount}")
-            time.sleep(0.5)
-
         else:
             print(f"  ⚠ Aksi tidak dikenal: {action} — dilewati")
+
+        return True
+
+    for s in steps:
+        if not (START <= s["num"] <= END):
+            continue
+        run_step(s)
 
     print(f"\n{'='*52}")
     print("  FLOW SELESAI ✓")

@@ -1,14 +1,46 @@
-# Flow AWS signup
-# Format: nomor -> nama_template -> aksi
-# Aksi yang tersedia:
-#   klik          = klik template
-#   input:teks    = klik template lalu ketik teks
-#   input:EMAIL   = klik template lalu ketik email tempmail (auto generate)
-#   input:NAMA    = klik template lalu ketik nama random
-#   input:PASSWORD= klik template lalu ketik password
-#   continue      = klik template (alias klik, untuk tombol next/continue)
-#   otp           = tunggu OTP dari inbox lalu ketik di template ini
-#   sleep:2       = tunggu X detik (tanpa template)
+# ============================================================
+# CARA PAKAI FLOW.TXT
+# ============================================================
+#
+# FORMAT DASAR:
+#   nomor -> nama_template -> aksi
+#
+# NOMOR STEP:
+#   1, 2, 3 ...       = urutan biasa
+#   19b, 19c ...      = sub-step (dijalankan setelah 19, sebelum 20)
+#
+# NAMA TEMPLATE:
+#   nama_file         = cari file visual_autoclicker/templates/nama_file.png
+#   nama1,nama2,nama3 = coba salah satu yang muncul duluan (multi-template)
+#   -                 = tidak perlu deteksi gambar (langsung aksi)
+#
+# AKSI:
+#   klik              = klik gambar template
+#   klik:timeout:60   = klik dengan timeout custom (detik)
+#   input:EMAIL       = klik lalu ketik email (auto generate)
+#   input:NAMA        = klik lalu ketik nama random
+#   input:PASSWORD    = klik lalu ketik password random
+#   input:ANDREAS     = klik lalu ketik alamat dari variables.txt
+#   input:PHONE       = klik lalu ketik nomor dari variables.txt (pasangan ANDREAS)
+#   input:BEBAS -> isi = klik lalu ketik teks bebas
+#   input:BEBAS -> isi -> enter  = ketik teks lalu tekan Enter
+#   input:BEBAS -> isi -> false  = ketik teks TANPA klik template dulu
+#   otp               = tunggu OTP dari inbox lalu ketik
+#   sleep:N           = tunggu N detik (pakai - sebagai template)
+#   scroll:down:400   = klik template lalu scroll ke bawah 400px
+#   scroll:up:400     = klik template lalu scroll ke atas 400px
+#   if_found:99       = cek gambar (3 detik), kalau ada → jalankan step 99 dulu
+#
+# CONTOH:
+#   1   -> chrome-1          -> klik
+#   3   -> -                 -> input:BEBAS -> aws free trial -> enter
+#   6   -> 3,3-01            -> input:EMAIL
+#   19b -> popup-gambar      -> if_found:99
+#   23  -> 20                -> scroll:down:400
+#   33  -> -                 -> sleep:60
+#   99  -> tombol-tutup      -> klik
+#
+# ============================================================
 
 # CHROME
 1  -> chrome-1              -> klik
